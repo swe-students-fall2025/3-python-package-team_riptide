@@ -7,10 +7,10 @@ the idea is: a set of random simple fun helper functions (ascii banner text, con
 ## team
 
 - [Saud Alsheddy](https://github.com/Saud-Al5)
-- teammate 2
-- teammate 3
-- teammate 4
-- teammate 5
+- [Omer Hortig](https://github.com/ohortig)
+- [Amy Liu](https://github.com/Amyliu2003)
+- [Alfardil Alam](https://github.com/alfardil)
+- [Lucy Hartigan](https://github.com/lucyhartigan)
 
 ## to be added
 
