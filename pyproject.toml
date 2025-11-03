@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "joytide"
-version = "0.0.1"
+version = "0.0.2"
 description = "A fun Python package by team_riptide with random playful helpers."
 readme = "README.md"
 authors = [

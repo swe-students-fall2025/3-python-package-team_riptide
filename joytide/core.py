@@ -7,7 +7,6 @@ after finishing a function we will need to add tests for them in the tests folde
 for now this file is empty on purpose.
 """
 
-
 import random, time, os
 from colorama import Fore, Style, init
 from . import ascii_art as ascii_art
@@ -31,8 +30,12 @@ def banner(
     if align not in {"left", "center", "right"}:
         raise ValueError("align must be 'left', 'center', or 'right'")
 
-    inner_width = len(text) + padding * 2
+    def _repeat_to_length(pattern: str, length: int) -> str:
+        # repeat pattern to exactly length chars
+        times = (length // len(pattern)) + 1
+        return (pattern * times)[:length]
 
+    inner_width = len(text) + padding * 2
     if align == "left":
         inner = text.ljust(inner_width)
     elif align == "right":
@@ -41,9 +44,8 @@ def banner(
         inner = text.center(inner_width)
 
     middle = f"{border}|{inner}|{border}"
-    top = border * len(middle)
-    bottom = top
-    return "\n".join([top, middle, bottom])
+    line = _repeat_to_length(border, len(middle))
+    return "\n".join([line, middle, line])
 
 
 def confetti(width=40, height=10, duration=3, density=0.2):
