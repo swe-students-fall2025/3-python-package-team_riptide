@@ -8,7 +8,7 @@ for now this file is empty on purpose.
 """
 
 
-import random, time, os
+import random, time, os, ascii
 from colorama import Fore, Style, init
 
 init(autoreset=True)
@@ -81,3 +81,46 @@ def confetti(width=40, height=10, duration=3, density=0.2):
             frame.append(row)
         print("\n".join(frame))
         time.sleep(0.1)
+
+
+def art(theme: str = 'random', size: str = 'small'):
+    """
+    Print ASCII art based on theme and size.
+
+    Args:
+        theme (str): 'animal', 'nature', 'tech', 'random'
+        size (str): 'small' or 'large'
+    """
+    theme = theme.lower()
+    size = size.lower()
+
+    arts = {
+        'animal': {
+            'small': [ascii.cat1, ascii.cat2, ascii.cow],
+            'large': [ascii.bear, ascii.dog]
+        },
+        'nature': {
+            'small': [ascii.mountains2, ascii.flower, ascii.cactus],
+            'large': [ascii.mountains1, ascii.camping, ascii.flowers]
+        },
+        'tech': {
+            'small': [ascii.calculator, ascii.camera, ascii.robot],
+            'large': [ascii.clock, ascii.tv, ascii.phone]
+        }
+    }
+
+    # if theme is random, pick random
+    if theme == 'random':
+        theme = random.choice(list(arts.keys()))
+
+    if theme not in arts:
+        print(f"Invalid theme '{theme}'. Valid options are: animal, nature, tech, random.")
+        return
+
+    if size not in ['small', 'large']:
+        print(f"Invalid size '{size}'. Valid options are: small, large.")
+        return
+
+    # pick random art with chosen theme / size
+    selected_art = random.choice(arts[theme][size])
+    selected_art()
