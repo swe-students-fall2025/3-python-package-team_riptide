@@ -10,7 +10,7 @@ for now this file is empty on purpose.
 
 import random, time, os
 from colorama import Fore, Style, init
-import ascii_art
+from . import ascii_art as ascii_art
 
 init(autoreset=True)
 
