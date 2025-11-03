@@ -23,6 +23,7 @@ classifiers = [
   "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
   "Operating System :: OS Independent",
 ]
+dependencies = ["colorama>=0.4.6"]
 
 [project.optional-dependencies]
 dev = ["pytest"]
