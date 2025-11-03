@@ -2,7 +2,7 @@
 PyPI: https://pypi.org/project/joytide/
 
 # joytide
-joytide is a small python package with random fun helpers to help me de-stress after hours of serious coding. each function can be visually changed with different inputs. the main way to use it is the **CLI**.
+joytide is a small python package with random fun helpers to help de-stress after hours of serious coding. each function can be visually changed with different inputs. the main way to use it is the **CLI**.
 
 **team members**  
 - [Saud Alsheddy](https://github.com/Saud-Al5)  
