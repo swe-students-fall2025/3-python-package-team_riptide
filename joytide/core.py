@@ -8,6 +8,12 @@ for now this file is empty on purpose.
 """
 
 
+import random, time, os
+from colorama import Fore, Style, init
+
+init(autoreset=True)
+
+
 def banner(
     text: str, border: str = "*", padding: int = 1, align: str = "center"
 ) -> str:
@@ -37,3 +43,41 @@ def banner(
     top = border * len(middle)
     bottom = top
     return "\n".join([top, middle, bottom])
+
+
+def confetti(width=40, height=10, duration=3, density=0.2):
+    """
+    Print a colorful falling confetti animation in the terminal.
+
+    Args:
+        width (int): number of characters per line.
+        height (int): number of lines per frame.
+        duration (float): how long to run in seconds.
+        density (float): probability of a confetti appearing per cell.
+    """
+    if width <= 0 or height <= 0:
+        raise ValueError("width and height must be > 0")
+    if not (0 < density <= 1):
+        raise ValueError("density must be between 0 and 1")
+    if duration <= 0:
+        raise ValueError("duration must be > 0")
+
+    chars = ["*", "✨", ".", "o", "💫", "🎉"]
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
+    end_time = time.time() + duration
+
+    while time.time() < end_time:
+        os.system("cls" if os.name == "nt" else "clear")  # clear terminal
+        frame = []
+        for _ in range(height):
+            row = ""
+            for _ in range(width):
+                if random.random() < density:
+                    color = random.choice(colors)
+                    char = random.choice(chars)
+                    row += color + char + Style.RESET_ALL
+                else:
+                    row += " "
+            frame.append(row)
+        print("\n".join(frame))
+        time.sleep(0.1)
