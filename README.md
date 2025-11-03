@@ -1,3 +1,5 @@
+![CI / CD](https://github.com/swe-students-fall2025/3-python-package-team_riptide/actions/workflows/build.yaml/badge.svg?branch=main&v=2)
+
 # joytide
 
 joytide is a small python package written by team_riptide for project 3 in our software engineering course.
