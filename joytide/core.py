@@ -7,7 +7,6 @@ after finishing a function we will need to add tests for them in the tests folde
 for now this file is empty on purpose.
 """
 
-
 import random, time, os
 from colorama import Fore, Style, init
 from . import ascii_art as ascii_art
@@ -31,8 +30,12 @@ def banner(
     if align not in {"left", "center", "right"}:
         raise ValueError("align must be 'left', 'center', or 'right'")
 
-    inner_width = len(text) + padding * 2
+    def _repeat_to_length(pattern: str, length: int) -> str:
+        # repeat pattern to exactly length chars
+        times = (length // len(pattern)) + 1
+        return (pattern * times)[:length]
 
+    inner_width = len(text) + padding * 2
     if align == "left":
         inner = text.ljust(inner_width)
     elif align == "right":
@@ -41,9 +44,8 @@ def banner(
         inner = text.center(inner_width)
 
     middle = f"{border}|{inner}|{border}"
-    top = border * len(middle)
-    bottom = top
-    return "\n".join([top, middle, bottom])
+    line = _repeat_to_length(border, len(middle))
+    return "\n".join([line, middle, line])
 
 
 def confetti(width=40, height=10, duration=3, density=0.2):
@@ -83,7 +85,8 @@ def confetti(width=40, height=10, duration=3, density=0.2):
         print("\n".join(frame))
         time.sleep(0.1)
 
-def art(theme: str = 'random', size: str = 'small'):
+
+def art(theme: str = "random", size: str = "small"):
     """
     Print ASCII art based on theme and size.
 
@@ -95,29 +98,31 @@ def art(theme: str = 'random', size: str = 'small'):
     size = size.lower()
 
     arts = {
-        'animal': {
-            'small': [ascii_art.cat1, ascii_art.cat2, ascii_art.cow],
-            'large': [ascii_art.bear, ascii_art.dog]
+        "animal": {
+            "small": [ascii_art.cat1, ascii_art.cat2, ascii_art.cow],
+            "large": [ascii_art.bear, ascii_art.dog],
         },
-        'nature': {
-            'small': [ascii_art.mountains2, ascii_art.flower, ascii_art.cactus],
-            'large': [ascii_art.mountains1, ascii_art.camping, ascii_art.flowers]
+        "nature": {
+            "small": [ascii_art.mountains2, ascii_art.flower, ascii_art.cactus],
+            "large": [ascii_art.mountains1, ascii_art.camping, ascii_art.flowers],
         },
-        'tech': {
-            'small': [ascii_art.calculator, ascii_art.camera, ascii_art.robot],
-            'large': [ascii_art.clock, ascii_art.tv, ascii_art.phone]
-        }
+        "tech": {
+            "small": [ascii_art.calculator, ascii_art.camera, ascii_art.robot],
+            "large": [ascii_art.clock, ascii_art.tv, ascii_art.phone],
+        },
     }
 
     # if theme is random, pick random
-    if theme == 'random':
+    if theme == "random":
         theme = random.choice(list(arts.keys()))
 
     if theme not in arts:
-        print(f"Invalid theme '{theme}'. Valid options are: animal, nature, tech, random.")
+        print(
+            f"Invalid theme '{theme}'. Valid options are: animal, nature, tech, random."
+        )
         return
 
-    if size not in ['small', 'large']:
+    if size not in ["small", "large"]:
         print(f"Invalid size '{size}'. Valid options are: small, large.")
         return
 

@@ -56,8 +56,8 @@ joytide banner "right" --border "<>" --align right
 a short demo that calls each function is in `examples/demo.py`.
 
 ```bash
-python examples/demo.py
-py examples/demo.py
+python demo.py
+py demo.py
 ```
 
 
