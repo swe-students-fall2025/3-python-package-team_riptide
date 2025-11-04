@@ -10,6 +10,10 @@ class GameWonError(Exception):
     """Custom exception for when the game is won"""
     pass
 
+class BoardTooSmallError(Exception):
+     """Custom exception for when the board is too small (less than 2x2)"""
+     pass
+
 class Board:
      """
      Represents the 2048 game board
@@ -18,6 +22,8 @@ class Board:
      prob (float): The probability of a tile being filled with a 4 (default 0.25)
      """
      def __init__(self, size: int = 4, prob: float = 0.25, winning_tile: int = 2048) -> None:
+          if size < 2:
+               raise BoardTooSmallError("Error: Board must be at least 2x2")
           self.size = size
           self.prob = prob
           self.winning_tile = winning_tile
@@ -153,7 +159,11 @@ def get_key() -> str:
 
 
 def start_game(size: int = 4, prob: float = 0.25, winning_tile: int = 2048) -> None:
-     board = Board(size=size, prob=prob, winning_tile=winning_tile)
+     try:
+          board = Board(size=size, prob=prob, winning_tile=winning_tile)
+     except BoardTooSmallError as e:
+          print(e)
+          sys.exit(1)
      
      try:
           while True:
