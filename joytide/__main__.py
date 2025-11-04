@@ -1,18 +1,21 @@
 # joytide/__main__.py
 import argparse
 
-from .core import banner
-
+from .core import banner, game_2048
 
 def _run_banner(args) -> int:
     print(banner(args.text, border=args.border, padding=args.padding, align=args.align))
     return 0
 
+def _run_game_2048(args) -> int:
+    game_2048(size=args.size, prob=args.prob, winning_tile=args.winning_tile)
+    return 0
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="joytide", description="joytide CLI")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
+    # banner functionality
     p_banner = sub.add_parser("banner", help="print an ASCII banner")
     p_banner.add_argument("text")
     p_banner.add_argument("--border", default="*", help="border characters")
@@ -21,6 +24,13 @@ def main(argv=None) -> int:
         "--align", choices=["left", "center", "right"], default="center"
     )
     p_banner.set_defaults(func=_run_banner)
+
+    # 2048 functionality
+    p_2048 = sub.add_parser("2048", help="play 2048 in your terminal")
+    p_2048.add_argument("--size", type=int, default=4, help="board size (default: 4)")
+    p_2048.add_argument("--prob", type=float, default=0.25, help="probability of a 4 tile appearing (default: 0.25)")
+    p_2048.add_argument("--winning-tile", type=int, default=2048, help="winning tile value (default: 2048)")
+    p_2048.set_defaults(func=_run_game_2048)
 
     args = parser.parse_args(argv)
     return args.func(args)
