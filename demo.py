@@ -64,7 +64,7 @@ def demo_race() -> None:
     section("race() demo")
     print("Quick race with parameters")
     print("-----------------------------------")
-    race(["Mario", "Peach", "Yoshi"], width=100, delay=0.2)
+    race(["Mario", "Peach", "Yoshi"], width=100, delay=0.02)
 
     print("Quick race with defaults")
     print("-----------------------------------")
@@ -88,11 +88,11 @@ def demo_2048() -> None:
 
 
 def main() -> None:
-    demo_race()
     demo_banner()
     demo_confetti()
     demo_ascii_art()
     demo_2048()
+    demo_race()
 
 
 if __name__ == "__main__":

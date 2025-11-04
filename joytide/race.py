@@ -53,5 +53,5 @@ def race(names, width: int = 32, delay: float = 0.08):
         time.sleep(delay)
 
     print("\n")
-    confetti(width=50, height=12, duration=1, density=0.15)
+    confetti()
     print(banner(f"Winner: {winner}!", border="*", padding=1, align="center"))

@@ -20,7 +20,7 @@ requires **python 3.10 or higher**
 ```bash
 pip install joytide
 # if pip is not on PATH:
-python -m pip install joytide
+python3 -m pip install joytide
 # windows:
 py -m pip install joytide
 ```
@@ -36,7 +36,7 @@ print an ASCII banner.
 ```bash
 joytide banner TEXT [--border "*" ] [--padding 1] [--align left|center|right]
 # if console script isn't on PATH:
-python -m joytide banner TEXT --border "#" --padding 2 --align right
+python3 -m joytide banner TEXT --border "#" --padding 2 --align right
 py -m joytide banner "team_riptide"   # windows
 ```
 
@@ -47,71 +47,6 @@ joytide banner "hello"
 joytide banner "team_riptide" --border "##"
 joytide banner "left"  --padding 2 --align left
 joytide banner "right" --border "<>" --align right
-```
-
----
-
-### Art
-
-Print ASCII art with a chosen theme and size.
-
-**Usage**
-
-```bash
-joytide art [--theme animal|nature|tech|random] [--size small|large]
-# if console script isn't on PATH:
-python -m joytide art --theme animal --size large
-py -m joytide art --theme tech  #windows
-```
-
-**examples**
-
-```bash
-joytide art
-joytide art --theme animal
-joytide art --theme nature --size large
-joytide art --theme tech --size small
-joytide art --theme random --size large
-```
-
----
-
-### 2048
-
-Play the game 2048 in your terminal
-
-**Usage**
-
-```bash
-joytide 2048 [--size SIZE] [--prob PROB] [--winning-tile TILE]
-# if console script isn't on PATH:
-python -m joytide 2048 --size 5 --prob 0.3 --winning-tile 4096
-py -m joytide 2048   # windows
-- `--size`: Board size (default: 4, must be > 1)
-- `--prob`: Probability of spawning a 4 tile (default: 0.25, range: 0-1)
-- `--winning-tile`: Target tile value to win (default: 2048)
-```
-
-**examples**
-
-```bash
-joytide 2048
-joytide 2048 --size 5
-joytide 2048 --size 3 --prob 0.5 --winning-tile 512
-```
-
----
-
-### Race
-
-Race 2 or more players!
-
-**Usage**
-
-```bash
-joytide race Mario Peach Yoshi
-joytide race "Fast Car" "Zoomies" --delay 0.15 # to make the race slower
-joytide race Me You --width 50 # change track width
 ```
 
 ---
@@ -151,13 +86,88 @@ joytide confetti --gravity 0.015 --wind 0.005  # slower, smoother motion
 joytide confetti --width 30 --height 10 --n-particles 40  # mini version
 ```
 
-## example program for all functions
+---
 
-a short demo that calls each function is in `examples/demo.py`.
+
+### Art
+
+Print ASCII art with a chosen theme and size.
+
+**Usage**
 
 ```bash
-python demo.py
+joytide art [--theme animal|nature|tech|random] [--size small|large]
+# if console script isn't on PATH:
+python3 -m joytide art --theme animal --size large
+py -m joytide art --theme tech  #windows
+```
+
+**examples**
+
+```bash
+joytide art
+joytide art --theme animal
+joytide art --theme nature --size large
+joytide art --theme tech --size small
+joytide art --theme random --size large
+```
+
+---
+
+### 2048
+
+Play the game 2048 in your terminal
+
+**Usage**
+
+```bash
+joytide 2048 [--size SIZE] [--prob PROB] [--winning-tile TILE]
+# if console script isn't on PATH:
+python3 -m joytide 2048 --size 5 --prob 0.3 --winning-tile 4096
+py -m joytide 2048   # windows
+```
+**Options**
+
+- `--size`: Board size (default: 4, must be > 1)
+- `--prob`: Probability of spawning a 4 tile (default: 0.25, range: 0-1)
+- `--winning-tile`: Target tile value to win (default: 2048)
+
+
+**examples**
+
+```bash
+joytide 2048
+joytide 2048 --size 5
+joytide 2048 --size 3 --prob 0.5 --winning-tile 512
+```
+
+---
+
+### Race
+
+Race 2 or more players!
+
+**Usage**
+
+```bash
+joytide race Mario Peach Yoshi
+joytide race "Fast Car" "Zoomies" --delay 0.15 # to make the race slower
+joytide race Me You --width 50 # change track width
+```
+
+## example program for all functions
+
+- a short demo that calls each function is in [`demo.py`](./demo.py).
+- [demo.py (permalink for PyPI)](https://github.com/swe-students-fall2025/3-python-package-team_riptide/blob/main/demo.py)
+
+to run it:
+
+```bash
+python3 demo.py
+# windows:
 py demo.py
+# if you're using pipenv:
+pipenv run python3 demo.py
 ```
 
 ## how to contribute
@@ -165,16 +175,16 @@ py demo.py
 we use pipenv for development.
 
 ```bash
-python -m pip install --user pipenv
+python3 -m pip install --user pipenv
 pipenv install --dev
 pipenv install -e .
-pipenv run python -m pytest -v
+pipenv run python3 -m pytest -v
 ```
 
 build the package manually if needed:
 
 ```bash
-pipenv run python -m build .
+pipenv run python3 -m build .
 ```
 
 format code with Black:
@@ -188,7 +198,7 @@ pipenv run black .
 each function should have tests for a normal case, an edge case, and an invalid input case.
 
 ```bash
-pipenv run python -m pytest -v
+pipenv run python3 -m pytest -v
 ```
 
 ## CI / CD
