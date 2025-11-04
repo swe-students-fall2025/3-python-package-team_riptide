@@ -2,6 +2,7 @@
 import argparse
 
 from .core import banner, game_2048, art, confetti
+from .race import race
 
 
 def _run_banner(args) -> int:
@@ -16,6 +17,11 @@ def _run_game_2048(args) -> int:
 
 def _run_art(args):
     art(theme=args.theme, size=args.size)
+    return 0
+
+
+def _run_race(args) -> int:
+    race(args.names, width=args.width, delay=args.delay)
     return 0
 
 def _run_confetti(args):
@@ -73,6 +79,17 @@ def main(argv=None) -> int:
         "--size", choices=["small", "large"], default="small", help="size of the art"
     )
     p_art.set_defaults(func=_run_art)
+
+    # race function
+    p_race = sub.add_parser("race", help="run an ASCII race")
+    p_race.add_argument("names", nargs="+", help="racer names (2+)")
+    p_race.add_argument(
+        "--width", type=int, default=32, help="track width (default: 32)"
+    )
+    p_race.add_argument(
+        "--delay", type=float, default=0.04, help="frame delay seconds (default: 0.04)"
+    )
+    p_race.set_defaults(func=_run_race)
 
     #  confetti function
     p_confetti = sub.add_parser("confetti", help="run confetti animation in terminal")

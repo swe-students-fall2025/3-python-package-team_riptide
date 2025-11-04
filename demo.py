@@ -1,5 +1,6 @@
 from joytide import banner
 from joytide import art
+from joytide import game_2048
 from joytide import confetti
 
 
@@ -51,9 +52,20 @@ def demo_alfardil() -> None:
     print("todo")
 
 
-def demo_omer() -> None:
-    section("omer")
-    print("todo")
+def demo_2048() -> None:
+    section("2048")
+    print("/" * 40 + "\n")
+    print("[*] Default parameters: (size=4, prob=0.25, winning_tile=2048)\n")
+    print("/" * 40 + "\n")
+    game_2048()
+    print("/" * 40 + "\n")
+    print("[*] Quick game: (size = 2, prob = 1.0, winning_tile = 64)\n")
+    print("/" * 40 + "\n")
+    game_2048(size=2, prob=1.0, winning_tile=32)
+    print("/" * 40 + "\n")
+    print("[*] Long game: (size = 5, prob = 0.1, winning_tile = 4096)\n")
+    print("/" * 40 + "\n")
+    game_2048(size=5, prob=0.1, winning_tile=4096)
 
 
 def main() -> None:
@@ -62,7 +74,7 @@ def main() -> None:
     # demo_confetti()
     demo_ascii_art()
     # demo_alfardil()
-    # demo_omer()
+    demo_2048()
 
 
 if __name__ == "__main__":
