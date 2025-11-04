@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "joytide"
-version = "0.0.3"
+version = "0.0.4"
 description = "A fun Python package by team_riptide with random playful helpers."
 readme = "README.md"
 authors = [
@@ -34,3 +34,20 @@ Repository = "https://github.com/swe-students-fall2025/3-python-package-team_rip
 
 [project.scripts]
 joytide = "joytide.__main__:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.pytest_cache
+  | \.venv
+  | build
+  | dist
+)/
+| ascii_art\.py  # exclude ASCII art file from formatting
+'''

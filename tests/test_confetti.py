@@ -1,6 +1,7 @@
 import pytest
 from joytide import confetti
 
+
 def test_confetti_invalid_inputs():
     with pytest.raises(ValueError):
         confetti(width=0)
@@ -10,6 +11,7 @@ def test_confetti_invalid_inputs():
         confetti(density=2)
     with pytest.raises(ValueError):
         confetti(duration=0)
+
 
 def test_confetti_runs_and_prints(capsys):
     # Run a very short version to test output
