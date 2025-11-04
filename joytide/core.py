@@ -9,6 +9,7 @@ for now this file is empty on purpose.
 
 import random, time, os
 from colorama import Fore, Style, init
+from .twenty_48 import start_game
 from . import ascii_art as ascii_art
 
 init(autoreset=True)
@@ -85,6 +86,11 @@ def confetti(width=40, height=10, duration=3, density=0.2):
         print("\n".join(frame))
         time.sleep(0.1)
 
+def game_2048(size: int = 4, prob: float = 0.25, winning_tile: int = 2048):
+    print(banner("Welcome to 2048!", border="*", padding=1, align="center"))
+    print("\nUse WASD to move the tiles. Merge tiles of the same value to get to 2048!\n")
+    print("Press Q to quit\n")
+    start_game(size=size, prob=prob, winning_tile=winning_tile)
 
 def art(theme: str = "random", size: str = "small"):
     """
