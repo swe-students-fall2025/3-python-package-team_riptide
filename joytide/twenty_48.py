@@ -1,8 +1,6 @@
 import random
 import sys
-import os
-import termios
-import tty
+import readchar
 
 class GameOverError(Exception):
     """Custom exception for when the game is over"""
@@ -145,7 +143,7 @@ def get_key() -> str:
      Captures a single keyboard input from terminal.
      Returns the character pressed in lowercase.
      """
-     char = sys.stdin.read(1)
+     char = readchar.readkey()
      
      # Handle Ctrl+C
      if char == '\x03':
@@ -157,14 +155,7 @@ def get_key() -> str:
 def start_game(size: int = 4, prob: float = 0.25, winning_tile: int = 2048) -> None:
      board = Board(size=size, prob=prob, winning_tile=winning_tile)
      
-     # Save terminal settings and disable echo
-     fd = sys.stdin.fileno()
-     old_settings = termios.tcgetattr(fd)
-     
      try:
-          # Disable echo by setting terminal to raw mode
-          tty.setcbreak(fd)
-          
           while True:
                try:
                     print(board)
@@ -192,5 +183,3 @@ def start_game(size: int = 4, prob: float = 0.25, winning_tile: int = 2048) -> N
      finally:
           # Flush stdout to ensure all output is displayed
           sys.stdout.flush()
-          # Restore terminal settings and flush input
-          termios.tcsetattr(fd, termios.TCSAFLUSH, old_settings)
