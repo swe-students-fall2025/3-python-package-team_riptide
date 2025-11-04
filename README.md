@@ -71,6 +71,27 @@ joytide art --theme random --size large
 
 ---
 
+### 2048
+Play the game 2048 in your terminal
+
+**Usage**
+```bash
+joytide 2048 [--size SIZE] [--prob PROB] [--winning-tile TILE]
+# if console script isn't on PATH:
+python -m joytide 2048 --size 5 --prob 0.3 --winning-tile 4096
+py -m joytide 2048   # windows**Options:**
+- `--size`: Board size (default: 4, must be > 1)
+- `--prob`: Probability of spawning a 4 tile (default: 0.25, range: 0-1)  
+- `--winning-tile`: Target tile value to win (default: 2048)
+```
+
+**examples**
+```bash
+joytide 2048
+joytide 2048 --size 5
+joytide 2048 --size 3 --prob 0.5 --winning-tile 512
+```
+
 ### Put each of your functions here with examples
 
 ## example program for all functions
@@ -100,6 +121,11 @@ build the package manually if needed:
 pipenv run python -m build .
 ```
 
+format code with Black:
+```bash
+pipenv run black .
+```
+
 ## testing
 
 each function should have tests for a normal case, an edge case, and an invalid input case.
@@ -110,7 +136,8 @@ pipenv run python -m pytest -v
 
 ## CI / CD
 
-- pull requests run tests on python 3.11 and 3.12  
+- code is formatted with **Black** for consistent style
+- pull requests run tests on python 3.11 and 3.12 
 - merges to `main` build the package and publish to **PyPI** using twine via GitHub Actions (`pypa/gh-action-pypi-publish`)
 
 ## configuration

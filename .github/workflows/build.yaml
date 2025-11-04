@@ -6,6 +6,21 @@ on:
     branches: [main]
 
 jobs:
+  # Code formatting check with Black
+  format-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python, pipenv and Pipfile packages
+        uses: kojoru/prepare-pipenv@v1
+        with:
+          python-version: "3.12"
+      - name: Check code formatting with Black
+        run: |
+          pipenv install black
+          pipenv run black --check --diff .
+
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -29,7 +44,7 @@ jobs:
 
   deliver:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    needs: [build]
+    needs: [format-check, build]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
