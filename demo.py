@@ -32,13 +32,14 @@ def demo_confetti() -> None:
     print("\n Congrates Confetti!\n")
 
     print("Now testing a slower gravity, longer celebration* \n")
-    confetti(width=60, height=20, n_particles=100, spawn_time=5.0, gravity=0.015, wind=0.005)
+    confetti(
+        width=60, height=20, n_particles=100, spawn_time=5.0, gravity=0.015, wind=0.005
+    )
     print("\n Slower gravity confetti done! 🎊\n")
 
     print("Also a *mini confetti burst* for small terminals\n")
     confetti(width=30, height=10, n_particles=20, spawn_time=1.0)
     print("\n Mini confetti burst complete!\n")
-
 
 
 def demo_ascii_art() -> None:

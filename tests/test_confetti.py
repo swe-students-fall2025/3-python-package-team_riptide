@@ -1,12 +1,14 @@
 import pytest
 from joytide.core import confetti
 
+
 def test_confetti_invalid_dimensions():
     # width or height ≤ 0 should raise
     with pytest.raises(ValueError):
         confetti(width=0, height=10, spawn_time=0.1)
     with pytest.raises(ValueError):
         confetti(width=10, height=-1, spawn_time=0.1)
+
 
 def test_confetti_invalid_physics_values():
     # gravity and wind can't be negative
@@ -18,6 +20,7 @@ def test_confetti_invalid_physics_values():
     with pytest.raises(ValueError):
         confetti(width=10, height=5, spawn_time=0)
 
+
 def test_confetti_runs_and_prints(monkeypatch, capsys):
     """
     Run a very short confetti simulation to ensure it prints frames.
@@ -26,6 +29,7 @@ def test_confetti_runs_and_prints(monkeypatch, capsys):
     import time
 
     fake_time = [0]
+
     def fake_now():
         fake_time[0] += 0.05
         return fake_time[0]
@@ -39,10 +43,13 @@ def test_confetti_runs_and_prints(monkeypatch, capsys):
     assert any(c in out for c in ["*", "✨", "🎉", "💫"])
     assert len(out.strip()) > 0
 
+
 def test_confetti_stops_naturally(monkeypatch):
     """Ensure confetti eventually ends once particles have landed."""
     import time
+
     fake_time = [0]
+
     def fake_now():
         fake_time[0] += 0.5
         return fake_time[0]

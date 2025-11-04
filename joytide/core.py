@@ -49,14 +49,15 @@ def banner(
     return "\n".join([line, middle, line])
 
 
-
 import random, time, sys, shutil
 from colorama import Fore, Style, init
 
 init(autoreset=True)
 
-def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
-             gravity=0.03, wind=0.01):
+
+def confetti(
+    width=40, height=12, n_particles=120, spawn_time=2.0, gravity=0.03, wind=0.01
+):
     """
     Confetti animation with:
     - Limited spawn time
@@ -80,25 +81,22 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
         print(f"   Requested: {width}×{height}")
         print(f"   Current:   {cols}×{rows}")
         print("Please enlarge your terminal window, then press Enter to continue...")
-        input() 
+        input()
 
-    #check again after user resizes
+    # check again after user resizes
     cols, rows = shutil.get_terminal_size((80, 24))
 
-    #adjust to fit new dimensions if still smaller
+    # adjust to fit new dimensions if still smaller
     width = min(width, cols - 2)
     height = min(height, rows - 2)
 
     print(f"\n Using adjusted size: {width}×{height}\n")
     time.sleep(1)
 
-
     padding_top = max(0, (rows - height) // 2)
 
-
     chars = ["*", "✨", ".", "o", "💫", "🎉"]
-    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.CYAN,
-              Fore.MAGENTA, Fore.WHITE]
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
 
     particles = []
     start_time = time.time()
@@ -108,20 +106,22 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
         current_time = time.time()
         elapsed = current_time - start_time
 
-        #spawn new confetti
+        # spawn new confetti
         if elapsed < spawn_time:
             for _ in range(random.randint(2, 10)):
-                particles.append({
-                    "x": random.uniform(0, width - 1),
-                    "y": 0,
-                    "vx": random.uniform(-0.3, 0.3),
-                    "vy": random.uniform(0.0, 0.4),
-                    "ax": random.uniform(-wind, wind),
-                    "ay": random.uniform(gravity * 0.5, gravity * 1.5),
-                    "char": random.choice(chars),
-                    "color": random.choice(colors),
-                    "landed": False,
-                })
+                particles.append(
+                    {
+                        "x": random.uniform(0, width - 1),
+                        "y": 0,
+                        "vx": random.uniform(-0.3, 0.3),
+                        "vy": random.uniform(0.0, 0.4),
+                        "ax": random.uniform(-wind, wind),
+                        "ay": random.uniform(gravity * 0.5, gravity * 1.5),
+                        "char": random.choice(chars),
+                        "color": random.choice(colors),
+                        "landed": False,
+                    }
+                )
 
         # frame redraw
         sys.stdout.write("\033[H\033[J")  # Move cursor home + clear
@@ -129,7 +129,7 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
 
         frame = [[" " for _ in range(width)] for _ in range(height)]
 
-        #Update particle positions
+        # Update particle positions
         for p in particles:
             if not p["landed"]:
                 p["vx"] += p["ax"]
@@ -137,7 +137,6 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
                 p["vx"] = max(-0.4, min(0.4, p["vx"]))
                 p["x"] += p["vx"]
                 p["y"] += p["vy"]
-
 
                 if p["x"] < 0:
                     p["x"] = 0
@@ -149,11 +148,10 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
                 xi = int(p["x"])
                 floor_y = ground[xi]
 
-
                 if p["y"] >= floor_y:
                     p["y"] = floor_y
                     p["landed"] = True
-                    ground[xi] -= 1  
+                    ground[xi] -= 1
 
             xi, yi = int(p["x"]), int(p["y"])
             if 0 <= yi < height:
@@ -162,7 +160,6 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
         if min(ground) < height - 1:
             floor_line = height - 1
             frame[floor_line] = ["·" for _ in range(width)]
-
 
         sys.stdout.write("\n".join("".join(row) for row in frame))
         sys.stdout.flush()

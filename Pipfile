@@ -10,11 +10,11 @@ joytide = {file = ".", editable = true}
 
 [dev-packages]
 build = "*"
-black = "*"
 pytest = "*"
 coverage = "*"
 pytest-cov = "*"
 twine = "*"
+black = "*"
 
 [requires]
 python_version = "3"
