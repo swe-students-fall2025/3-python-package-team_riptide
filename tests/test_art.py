@@ -1,6 +1,6 @@
 import pytest
 from joytide import art
-import io, sys, random
+import random
 
 def test_valid_art(capsys):
     art(theme='animal', size='small')
