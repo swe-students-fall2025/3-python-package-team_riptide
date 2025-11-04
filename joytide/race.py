@@ -1,5 +1,4 @@
-
-import os, random, time 
+import os, random, time
 from .core import banner, confetti
 
 
@@ -21,10 +20,8 @@ def race(names, width: int = 32, delay: float = 0.08):
         print("Delay must be > 0")
         return
 
-    
     names = [str(n) for n in names]
 
-    
     pos = {n: 0 for n in names}
     finish = width
 
@@ -38,13 +35,12 @@ def race(names, width: int = 32, delay: float = 0.08):
         print()
 
         for n in names:
-            
+
             step = random.randint(0, 1)
             pos[n] = min(pos[n] + step, finish)
 
-            
             track = "-" * finish
-            
+
             car_idx = pos[n]
             if car_idx >= finish:
                 car_idx = finish
