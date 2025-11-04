@@ -121,6 +121,11 @@ build the package manually if needed:
 pipenv run python -m build .
 ```
 
+format code with Black:
+```bash
+pipenv run black .
+```
+
 ## testing
 
 each function should have tests for a normal case, an edge case, and an invalid input case.
@@ -131,7 +136,8 @@ pipenv run python -m pytest -v
 
 ## CI / CD
 
-- pull requests run tests on python 3.11 and 3.12  
+- code is formatted with **Black** for consistent style
+- pull requests run tests on python 3.11 and 3.12 
 - merges to `main` build the package and publish to **PyPI** using twine via GitHub Actions (`pypa/gh-action-pypi-publish`)
 
 ## configuration
