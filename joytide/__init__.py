@@ -3,9 +3,9 @@ joytide package
 team_riptide
 """
 
-from .core import banner, confetti, game_2048
+from .core import banner, confetti, game_2048, art
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 # will be filled as we add functions
-__all__ = ["banner", "confetti", "game_2048"]
+__all__ = ["banner", "confetti", "game_2048", "art"]
