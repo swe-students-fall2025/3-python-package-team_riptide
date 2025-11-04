@@ -10,6 +10,7 @@ pytest = "*"
 coverage = "*"
 pytest-cov = "*"
 twine = "*"
+colorama = "*"
 
 [dev-packages]
 
