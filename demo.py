@@ -1,6 +1,7 @@
 from joytide import banner
 from joytide import art
 from joytide import game_2048
+from joytide import race
 
 
 def section(title: str) -> None:
@@ -44,9 +45,11 @@ def demo_ascii_art() -> None:
     print()
 
 
-def demo_alfardil() -> None:
-    section("alfardil")
-    print("todo")
+def demo_race() -> None:
+    section("race() demo")
+    print("Quick race with defaults")
+    print("-----------------------------------")
+    race(["Mario", "Peach", "Yoshi"])
 
 
 def demo_2048() -> None:
@@ -66,11 +69,11 @@ def demo_2048() -> None:
 
 
 def main() -> None:
+    demo_race()
     demo_banner()
     # uncomment your demo calls when ready to test
     # demo_confetti()
     demo_ascii_art()
-    # demo_alfardil()
     demo_2048()
 
 
