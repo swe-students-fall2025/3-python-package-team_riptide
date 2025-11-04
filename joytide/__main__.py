@@ -72,8 +72,12 @@ def main(argv=None) -> int:
     # race function
     p_race = sub.add_parser("race", help="run an ASCII race")
     p_race.add_argument("names", nargs="+", help="racer names (2+)")
-    p_race.add_argument("--width", type=int, default=32, help="track width (default: 32)")
-    p_race.add_argument("--delay", type=float, default=0.04, help="frame delay seconds (default: 0.04)")
+    p_race.add_argument(
+        "--width", type=int, default=32, help="track width (default: 32)"
+    )
+    p_race.add_argument(
+        "--delay", type=float, default=0.04, help="frame delay seconds (default: 0.04)"
+    )
     p_race.set_defaults(func=_run_race)
 
     args = parser.parse_args(argv)
