@@ -114,7 +114,42 @@ joytide race "Fast Car" "Zoomies" --delay 0.15 # to make the race slower
 joytide race Me You --width 50 # change track width
 ```
 
-### Put each of your functions here with examples
+---
+
+### Confetti
+
+Create a colorful **confetti animation** right in your terminal — great for celebrating test passes, merges, or just taking a break.
+
+**Usage**
+
+```bash
+joytide confetti [--width WIDTH] [--height HEIGHT] [--n-particles N]
+                 [--spawn-time SECONDS] [--gravity VALUE] [--wind VALUE]
+
+# If console script isn't on PATH:
+python -m joytide confetti --width 60 --height 15 --spawn-time 3.0
+py -m joytide confetti --n-particles 200 --gravity 0.02  # Windows
+```
+
+**Options**
+
+| Flag            | Description                                            | Default |
+| --------------- | ------------------------------------------------------ | ------- |
+| `--width`       | number of columns in the frame                         | `40`    |
+| `--height`      | number of rows                                         | `12`    |
+| `--n-particles` | **maximum total number** of confetti pieces that can appear                       | `120`   |
+| `--spawn-time`  | seconds to keep spawning new confetti before they stop | `2.0`   |
+| `--gravity`     | downward acceleration                                  | `0.03`  |
+| `--wind`        | horizontal drift per frame                             | `0.01`  |
+
+**Examples**
+
+```bash
+joytide confetti
+joytide confetti --width 80 --height 20 --n-particles 200 --spawn-time 3.5
+joytide confetti --gravity 0.015 --wind 0.005  # slower, smoother motion
+joytide confetti --width 30 --height 10 --n-particles 40  # mini version
+```
 
 ## example program for all functions
 
