@@ -2,12 +2,16 @@ import random
 import sys
 import readchar
 
+
 class GameOverError(Exception):
     """Custom exception for when the game is over"""
+
     pass
+
 
 class GameWonError(Exception):
     """Custom exception for when the game is won"""
+
     pass
 
 class BoardTooSmallError(Exception):
@@ -68,94 +72,94 @@ class Board:
                     self.occupied_tiles += 1
                     break
 
-     def move_left(self) -> None:
-          for j in range(self.size):
-               current_row = self.board[j]
-               updated_row = []
-               for i in range(self.size):
-                    if current_row[i] != 0:
-                         if updated_row and updated_row[-1] == current_row[i]:
-                              updated_row[-1] *= 2
-                              self.occupied_tiles -= 1
-                              if updated_row[-1] == self.winning_tile:
-                                   raise GameWonError("You won!")
-                         else:
-                              updated_row.append(current_row[i])
-               # fill the remaining cells with zeros
-               updated_row.extend([0] * (self.size - len(updated_row)))
-               self.board[j] = updated_row
-          self.add_random_tile()
+    def move_left(self) -> None:
+        for j in range(self.size):
+            current_row = self.board[j]
+            updated_row = []
+            for i in range(self.size):
+                if current_row[i] != 0:
+                    if updated_row and updated_row[-1] == current_row[i]:
+                        updated_row[-1] *= 2
+                        self.occupied_tiles -= 1
+                        if updated_row[-1] == self.winning_tile:
+                            raise GameWonError("You won!")
+                    else:
+                        updated_row.append(current_row[i])
+            # fill the remaining cells with zeros
+            updated_row.extend([0] * (self.size - len(updated_row)))
+            self.board[j] = updated_row
+        self.add_random_tile()
 
-     def move_right(self) -> None:
-          for j in range(self.size):
-               current_row = self.board[j]
-               updated_row = []
-               for i in range(self.size - 1, -1, -1):
-                    if current_row[i] != 0:
-                         if updated_row and updated_row[-1] == current_row[i]:
-                              updated_row[-1] *= 2
-                              self.occupied_tiles -= 1
-                              if updated_row[-1] == self.winning_tile:
-                                   raise GameWonError("You won!")
-                         else:
-                              updated_row.append(current_row[i])
-               # fill the remaining cells with zeros
-               updated_row.extend([0] * (self.size - len(updated_row)))
-               self.board[j] = updated_row[::-1]
-          self.add_random_tile()
+    def move_right(self) -> None:
+        for j in range(self.size):
+            current_row = self.board[j]
+            updated_row = []
+            for i in range(self.size - 1, -1, -1):
+                if current_row[i] != 0:
+                    if updated_row and updated_row[-1] == current_row[i]:
+                        updated_row[-1] *= 2
+                        self.occupied_tiles -= 1
+                        if updated_row[-1] == self.winning_tile:
+                            raise GameWonError("You won!")
+                    else:
+                        updated_row.append(current_row[i])
+            # fill the remaining cells with zeros
+            updated_row.extend([0] * (self.size - len(updated_row)))
+            self.board[j] = updated_row[::-1]
+        self.add_random_tile()
 
-     def move_up(self) -> None:
-          for i in range(self.size):
-               current_col = [self.board[j][i] for j in range(self.size)]
-               updated_col = []
-               for j in range(self.size):
-                    if current_col[j] != 0:
-                         if updated_col and updated_col[-1] == current_col[j]:
-                              updated_col[-1] *= 2
-                              self.occupied_tiles -= 1
-                              if updated_col[-1] == self.winning_tile:
-                                   raise GameWonError("You won!")
-                         else:
-                              updated_col.append(current_col[j])
-               # fill the remaining cells with zeros
-               updated_col.extend([0] * (self.size - len(updated_col)))
-               for j in range(self.size):
-                    self.board[j][i] = updated_col[j]
-          self.add_random_tile()
+    def move_up(self) -> None:
+        for i in range(self.size):
+            current_col = [self.board[j][i] for j in range(self.size)]
+            updated_col = []
+            for j in range(self.size):
+                if current_col[j] != 0:
+                    if updated_col and updated_col[-1] == current_col[j]:
+                        updated_col[-1] *= 2
+                        self.occupied_tiles -= 1
+                        if updated_col[-1] == self.winning_tile:
+                            raise GameWonError("You won!")
+                    else:
+                        updated_col.append(current_col[j])
+            # fill the remaining cells with zeros
+            updated_col.extend([0] * (self.size - len(updated_col)))
+            for j in range(self.size):
+                self.board[j][i] = updated_col[j]
+        self.add_random_tile()
 
-     def move_down(self) -> None:
-          for i in range(self.size):
-               current_col = [self.board[j][i] for j in range(self.size)]
-               updated_col = []
-               for j in range(self.size - 1, -1, -1):
-                    if current_col[j] != 0:
-                         if updated_col and updated_col[-1] == current_col[j]:
-                              updated_col[-1] *= 2
-                              self.occupied_tiles -= 1
-                              if updated_col[-1] == self.winning_tile:
-                                   raise GameWonError("You won!")
-                         else:
-                              updated_col.append(current_col[j])
-               # fill the remaining cells with zeros
-               updated_col.extend([0] * (self.size - len(updated_col)))
-               updated_col = updated_col[::-1]
-               for j in range(self.size):
-                    self.board[j][i] = updated_col[j]
-          self.add_random_tile()
+    def move_down(self) -> None:
+        for i in range(self.size):
+            current_col = [self.board[j][i] for j in range(self.size)]
+            updated_col = []
+            for j in range(self.size - 1, -1, -1):
+                if current_col[j] != 0:
+                    if updated_col and updated_col[-1] == current_col[j]:
+                        updated_col[-1] *= 2
+                        self.occupied_tiles -= 1
+                        if updated_col[-1] == self.winning_tile:
+                            raise GameWonError("You won!")
+                    else:
+                        updated_col.append(current_col[j])
+            # fill the remaining cells with zeros
+            updated_col.extend([0] * (self.size - len(updated_col)))
+            updated_col = updated_col[::-1]
+            for j in range(self.size):
+                self.board[j][i] = updated_col[j]
+        self.add_random_tile()
 
 
 def get_key() -> str:
-     """
-     Captures a single keyboard input from terminal.
-     Returns the character pressed in lowercase.
-     """
-     char = readchar.readkey()
-     
-     # Handle Ctrl+C
-     if char == '\x03':
-          return 'q'  # Treat Ctrl+C as quit
-     
-     return char.lower()
+    """
+    Captures a single keyboard input from terminal.
+    Returns the character pressed in lowercase.
+    """
+    char = readchar.readkey()
+
+    # Handle Ctrl+C
+    if char == "\x03":
+        return "q"  # Treat Ctrl+C as quit
+
+    return char.lower()
 
 
 def start_game(size: int = 4, prob: float = 0.25, winning_tile: int = 2048) -> None:
@@ -190,6 +194,6 @@ def start_game(size: int = 4, prob: float = 0.25, winning_tile: int = 2048) -> N
                except GameOverError as e:
                     print(e)
                     break
-     finally:
-          # Flush stdout to ensure all output is displayed
-          sys.stdout.flush()
+    finally:
+        # Flush stdout to ensure all output is displayed
+        sys.stdout.flush()

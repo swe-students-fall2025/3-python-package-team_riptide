@@ -1,6 +1,7 @@
 from joytide import banner
 from joytide import art
 
+
 def section(title: str) -> None:
     print("\n" + "=" * 60)
     print(title)
@@ -26,18 +27,18 @@ def demo_confetti() -> None:
 
 def demo_ascii_art() -> None:
     section("art() demo")
-    print('large nature art')
-    print('-----------------------------------')
-    art('random','large')
+    print("large nature art")
+    print("-----------------------------------")
+    art("nature", "large")
     print()
 
-    print('small animal art\n')
-    print('-----------------------------------')
-    art('animal', 'small')
+    print("small animal art\n")
+    print("-----------------------------------")
+    art("animal", "small")
     print()
 
-    print('small random art!')
-    print('-----------------------------------')
+    print("small random art!")
+    print("-----------------------------------")
     art()
     print()
 
