@@ -47,6 +47,10 @@ def demo_ascii_art() -> None:
 
 def demo_race() -> None:
     section("race() demo")
+    print("Quick race with parameters")
+    print("-----------------------------------")
+    race(["Mario", "Peach", "Yoshi"], width=100, delay=0.2)
+
     print("Quick race with defaults")
     print("-----------------------------------")
     race(["Mario", "Peach", "Yoshi"])
