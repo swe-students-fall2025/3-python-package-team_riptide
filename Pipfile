@@ -5,15 +5,16 @@ name = "pypi"
 
 [packages]
 joytide = { file = ".", editable = true }
-build = "*"
-pytest = "*"
-coverage = "*"
-pytest-cov = "*"
-twine = "*"
 colorama = "*"
 readchar = "*"
 
 [dev-packages]
+build = "*"
+black = "*"
+pytest = "*"
+coverage = "*"
+pytest-cov = "*"
+twine = "*"
 
 [requires]
 python_version = "3"
