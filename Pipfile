@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+joytide = {file = ".", editable = true}
 build = "*"
 pytest = "*"
 coverage = "*"
@@ -11,7 +12,6 @@ pytest-cov = "*"
 twine = "*"
 colorama = "*"
 readchar = "*"
-joytide = {file = ".", editable = true}
 
 [dev-packages]
 
