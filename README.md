@@ -49,6 +49,28 @@ joytide banner "right" --border "<>" --align right
 
 ---
 
+### Art
+Print ASCII art with a chosen theme and size.
+
+**Usage**
+```bash
+joytide art [--theme animal|nature|tech|random] [--size small|large]
+# if console script isn't on PATH:
+python -m joytide art --theme animal --size large
+py -m joytide art --theme tech  #windows
+```
+
+**examples**
+```bash
+joytide art
+joytide art --theme animal
+joytide art --theme nature --size large
+joytide art --theme tech --size small
+joytide art --theme random --size large
+```
+
+---
+
 ### Put each of your functions here with examples
 
 ## example program for all functions

@@ -1,5 +1,5 @@
 from joytide import banner
-
+from joytide import art
 
 def section(title: str) -> None:
     print("\n" + "=" * 60)
@@ -26,7 +26,20 @@ def demo_confetti() -> None:
 
 def demo_ascii_art() -> None:
     section("art() demo")
-    print("todo")
+    print('large nature art')
+    print('-----------------------------------')
+    art('random','large')
+    print()
+
+    print('small animal art\n')
+    print('-----------------------------------')
+    art('animal', 'small')
+    print()
+
+    print('small random art!')
+    print('-----------------------------------')
+    art()
+    print()
 
 
 def demo_alfardil() -> None:
@@ -43,7 +56,7 @@ def main() -> None:
     demo_banner()
     # uncomment your demo calls when ready to test
     # demo_confetti()
-    # demo_ascii_art()
+    demo_ascii_art()
     # demo_alfardil()
     # demo_omer()
 
