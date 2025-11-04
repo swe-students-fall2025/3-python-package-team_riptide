@@ -1,7 +1,7 @@
 # joytide/__main__.py
 import argparse
 
-from .core import banner, game_2048, art
+from .core import banner, game_2048, art, confetti
 from .race import race
 
 
@@ -22,6 +22,18 @@ def _run_art(args):
 
 def _run_race(args) -> int:
     race(args.names, width=args.width, delay=args.delay)
+    return 0
+
+
+def _run_confetti(args):
+    confetti(
+        width=args.width,
+        height=args.height,
+        n_particles=args.n_particles,
+        spawn_time=args.spawn_time,
+        gravity=args.gravity,
+        wind=args.wind,
+    )
     return 0
 
 
@@ -79,6 +91,26 @@ def main(argv=None) -> int:
         "--delay", type=float, default=0.04, help="frame delay seconds (default: 0.04)"
     )
     p_race.set_defaults(func=_run_race)
+
+    #  confetti function
+    p_confetti = sub.add_parser("confetti", help="run confetti animation in terminal")
+    p_confetti.add_argument("--width", type=int, default=40, help="number of columns")
+    p_confetti.add_argument("--height", type=int, default=12, help="number of rows")
+    p_confetti.add_argument(
+        "--n-particles", type=int, default=120, help="max number of confetti"
+    )
+    p_confetti.add_argument(
+        "--spawn-time",
+        type=float,
+        default=2.0,
+        help="how long to spawn new confetti (seconds)",
+    )
+    p_confetti.add_argument(
+        "--gravity", type=float, default=0.03, help="gravity strength"
+    )
+    p_confetti.add_argument("--wind", type=float, default=0.01, help="wind strength")
+
+    p_confetti.set_defaults(func=_run_confetti)
 
     args = parser.parse_args(argv)
     return args.func(args)

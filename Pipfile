@@ -4,17 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-joytide = { file = ".", editable = true }
 colorama = "*"
 readchar = "*"
+joytide = {file = ".", editable = true}
 
 [dev-packages]
 build = "*"
-black = "*"
 pytest = "*"
 coverage = "*"
 pytest-cov = "*"
 twine = "*"
+black = "*"
 
 [requires]
 python_version = "3"
