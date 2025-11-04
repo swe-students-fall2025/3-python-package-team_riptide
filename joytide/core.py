@@ -49,42 +49,128 @@ def banner(
     return "\n".join([line, middle, line])
 
 
-def confetti(width=40, height=10, duration=3, density=0.2):
-    """
-    Print a colorful falling confetti animation in the terminal.
 
-    Args:
-        width (int): number of characters per line.
-        height (int): number of lines per frame.
-        duration (float): how long to run in seconds.
-        density (float): probability of a confetti appearing per cell.
+import random, time, sys, shutil
+from colorama import Fore, Style, init
+
+init(autoreset=True)
+
+def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
+             gravity=0.03, wind=0.01):
     """
+    Confetti animation with:
+    - Limited spawn time
+    - Piling up at the bottom
+    - Vertical centering in terminal
+    - Natural stop when all confetti land
+    """
+
+    # check for invalid parameters
     if width <= 0 or height <= 0:
         raise ValueError("width and height must be > 0")
-    if not (0 < density <= 1):
-        raise ValueError("density must be between 0 and 1")
-    if duration <= 0:
-        raise ValueError("duration must be > 0")
+    if spawn_time <= 0:
+        raise ValueError("spawn_time must be > 0")
+    if gravity < 0 or wind < 0:
+        raise ValueError("gravity and wind must be non-negative")
+
+    # detect terminal size and warn if too small
+    cols, rows = shutil.get_terminal_size((80, 24))
+    if cols < width or rows < height:
+        print("\n !!! Terminal too small!")
+        print(f"   Requested: {width}×{height}")
+        print(f"   Current:   {cols}×{rows}")
+        print("Please enlarge your terminal window, then press Enter to continue...")
+        input() 
+
+    #check again after user resizes
+    cols, rows = shutil.get_terminal_size((80, 24))
+
+    #adjust to fit new dimensions if still smaller
+    width = min(width, cols - 2)
+    height = min(height, rows - 2)
+
+    print(f"\n Using adjusted size: {width}×{height}\n")
+    time.sleep(1)
+
+
+    padding_top = max(0, (rows - height) // 2)
+
 
     chars = ["*", "✨", ".", "o", "💫", "🎉"]
-    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.CYAN, Fore.MAGENTA, Fore.WHITE]
-    end_time = time.time() + duration
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.CYAN,
+              Fore.MAGENTA, Fore.WHITE]
 
-    while time.time() < end_time:
-        os.system("cls" if os.name == "nt" else "clear")  # clear terminal
-        frame = []
-        for _ in range(height):
-            row = ""
-            for _ in range(width):
-                if random.random() < density:
-                    color = random.choice(colors)
-                    char = random.choice(chars)
-                    row += color + char + Style.RESET_ALL
-                else:
-                    row += " "
-            frame.append(row)
-        print("\n".join(frame))
-        time.sleep(0.1)
+    particles = []
+    start_time = time.time()
+    ground = [height - 1 for _ in range(width)]
+
+    while True:
+        current_time = time.time()
+        elapsed = current_time - start_time
+
+        #spawn new confetti
+        if elapsed < spawn_time:
+            for _ in range(random.randint(5, 10)):
+                particles.append({
+                    "x": random.uniform(0, width - 1),
+                    "y": 0,
+                    "vx": random.uniform(-0.3, 0.3),
+                    "vy": random.uniform(0.0, 0.4),
+                    "ax": random.uniform(-wind, wind),
+                    "ay": random.uniform(gravity * 0.5, gravity * 1.5),
+                    "char": random.choice(chars),
+                    "color": random.choice(colors),
+                    "landed": False,
+                })
+
+        # frame redraw
+        sys.stdout.write("\033[H\033[J")  # Move cursor home + clear
+        sys.stdout.write("\n" * padding_top)
+
+        frame = [[" " for _ in range(width)] for _ in range(height)]
+
+        #Update particle positions
+        for p in particles:
+            if not p["landed"]:
+                p["vx"] += p["ax"]
+                p["vy"] += p["ay"]
+                p["vx"] = max(-0.4, min(0.4, p["vx"]))
+                p["x"] += p["vx"]
+                p["y"] += p["vy"]
+
+
+                if p["x"] < 0:
+                    p["x"] = 0
+                    p["vx"] *= -0.3
+                elif p["x"] >= width - 1:
+                    p["x"] = width - 1
+                    p["vx"] *= -0.3
+
+                xi = int(p["x"])
+                floor_y = ground[xi]
+
+
+                if p["y"] >= floor_y:
+                    p["y"] = floor_y
+                    p["landed"] = True
+                    ground[xi] -= 1  
+
+            xi, yi = int(p["x"]), int(p["y"])
+            if 0 <= yi < height:
+                frame[yi][xi] = p["color"] + p["char"] + Style.RESET_ALL
+
+        if min(ground) < height - 1:
+            floor_line = height - 1
+            frame[floor_line] = ["·" for _ in range(width)]
+
+
+        sys.stdout.write("\n".join("".join(row) for row in frame))
+        sys.stdout.flush()
+        time.sleep(0.08)
+
+        # Stop after spawn wundow and when all confetti have landed
+        if elapsed > spawn_time and all(p["landed"] for p in particles):
+            break
 
 
 def game_2048(size: int = 4, prob: float = 0.25, winning_tile: int = 2048):

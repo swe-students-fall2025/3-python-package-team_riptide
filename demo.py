@@ -1,5 +1,6 @@
 from joytide import banner
 from joytide import art
+from joytide import confetti
 
 
 def section(title: str) -> None:
@@ -19,10 +20,12 @@ def demo_banner() -> None:
     print(banner("joytide", border="><", padding=2, align="right"))
 
 
-# placeholders teammates will fill in later
 def demo_confetti() -> None:
     section("confetti() demo")
-    print("todo")
+    print("Launching colorful confetti animation… 🎉\n")
+    confetti(width=60, height=15, n_particles=80, spawn_time=2.5)
+    print("\nCongratulations!!\n")
+
 
 
 def demo_ascii_art() -> None:
