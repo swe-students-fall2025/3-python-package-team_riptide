@@ -79,7 +79,7 @@ Play the game 2048 in your terminal
 joytide 2048 [--size SIZE] [--prob PROB] [--winning-tile TILE]
 # if console script isn't on PATH:
 python -m joytide 2048 --size 5 --prob 0.3 --winning-tile 4096
-py -m joytide 2048   # windows**Options:**
+py -m joytide 2048   # windows
 - `--size`: Board size (default: 4, must be > 1)
 - `--prob`: Probability of spawning a 4 tile (default: 0.25, range: 0-1)  
 - `--winning-tile`: Target tile value to win (default: 2048)
