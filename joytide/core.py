@@ -110,7 +110,7 @@ def confetti(width=40, height=12, n_particles=120, spawn_time=2.0,
 
         #spawn new confetti
         if elapsed < spawn_time:
-            for _ in range(random.randint(5, 10)):
+            for _ in range(random.randint(2, 10)):
                 particles.append({
                     "x": random.uniform(0, width - 1),
                     "y": 0,

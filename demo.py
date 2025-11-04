@@ -22,10 +22,21 @@ def demo_banner() -> None:
 
 
 def demo_confetti() -> None:
+    print(banner("Joytide Demo", border="💫", padding=2, align="center"))
+    print("\nWelcome to the Joytide demo! Let's celebrate some terminal joy.\n")
+
     section("confetti() demo")
-    print("Launching colorful confetti animation… 🎉\n")
-    confetti(width=60, height=15, n_particles=80, spawn_time=2.5)
-    print("\nCongratulations!!\n")
+    print("Launching colorful confetti animation (default)… \n")
+    confetti(width=60, height=15, n_particles=30, spawn_time=2.5)
+    print("\n Congrates Confetti!\n")
+
+    print("Now testing a slower gravity, longer celebration* \n")
+    confetti(width=60, height=20, n_particles=100, spawn_time=5.0, gravity=0.015, wind=0.005)
+    print("\n Slower gravity confetti done! 🎊\n")
+
+    print("Also a *mini confetti burst* for small terminals\n")
+    confetti(width=30, height=10, n_particles=20, spawn_time=1.0)
+    print("\n Mini confetti burst complete!\n")
 
 
 
@@ -70,8 +81,7 @@ def demo_2048() -> None:
 
 def main() -> None:
     demo_banner()
-    # uncomment your demo calls when ready to test
-    # demo_confetti()
+    demo_confetti()
     demo_ascii_art()
     # demo_alfardil()
     demo_2048()
